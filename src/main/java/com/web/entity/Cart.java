@@ -1,0 +1,29 @@
+package com.web.entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cart")
+@Getter
+@Setter
+public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "product_color_id")
+    private ProductColor productColor;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+}
