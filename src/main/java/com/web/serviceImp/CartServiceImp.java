@@ -33,11 +33,11 @@ public class CartServiceImp implements CartService {
         Cart cart = new Cart();
         User user = userUtils.getUserWithAuthority();
         Optional<Cart> c = cartRepository.findByColorAndUser(user.getId(), productColorId);
-        if (c.isPresent()) {
+        if(c.isPresent()){
             return;
         }
         Optional<ProductColor> productColor = productColorRepository.findById(productColorId);
-        if (productColor.isEmpty()) {
+        if (productColor.isEmpty()){
             throw new MessageException("Không tìm thấy color");
         }
         cart.setUser(user);
@@ -55,7 +55,7 @@ public class CartServiceImp implements CartService {
     public List<CartResponse> findByUser() {
         List<Cart> list = cartRepository.findByUser(userUtils.getUserWithAuthority().getId());
         List<CartResponse> responses = new ArrayList<>();
-        for (Cart c : list) {
+        for(Cart c : list){
             CartResponse cartResponse = new CartResponse();
             cartResponse.setProductColor(c.getProductColor());
             cartResponse.setQuantity(c.getQuantity());
@@ -78,7 +78,7 @@ public class CartServiceImp implements CartService {
     public void downQuantity(Long id) {
         Cart cart = cartRepository.findById(id).get();
         cart.setQuantity(cart.getQuantity() - 1);
-        if (cart.getQuantity() == 0) {
+        if(cart.getQuantity() == 0){
             cartRepository.deleteById(id);
             return;
         }
@@ -99,7 +99,7 @@ public class CartServiceImp implements CartService {
     public Double totalAmountCart() {
         List<Cart> list = cartRepository.findByUser(userUtils.getUserWithAuthority().getId());
         Double total = 0D;
-        for (Cart c : list) {
+        for(Cart c : list){
             total += c.getQuantity() * c.getProductColor().getPrice();
         }
         return total;

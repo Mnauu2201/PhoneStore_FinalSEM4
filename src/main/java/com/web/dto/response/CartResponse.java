@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CartResponse {
+
     private Long id;
 
     private Integer quantity;
