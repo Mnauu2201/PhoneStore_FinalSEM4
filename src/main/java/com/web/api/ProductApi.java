@@ -33,26 +33,6 @@ public class ProductApi {
     @Autowired
     private ProductMapper productMapper;
 
-    @PostMapping("/admin/create")
-    public ResponseEntity<?> save(@RequestBody ProductRequest productRequest) {
-
-        Product response = productService.save(productRequest);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/admin/update")
-    public ResponseEntity<?> update(@RequestBody ProductRequest productRequest) {
-
-        Product response = productService.update(productRequest);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
-    @GetMapping("/admin/findById")
-    public ResponseEntity<?> findByIdForAdmin(@RequestParam("id") Long id) {
-        Product response = productService.findByIdForAdmin(id);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
     @GetMapping("/public/findById")
     public ResponseEntity<?> findByIdForUser(@RequestParam("id") Long id) {
         Product response = productService.findByIdForAdmin(id);
@@ -67,11 +47,6 @@ public class ProductApi {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/admin/delete")
-    public ResponseEntity<?> delete(@RequestParam("id") Long id) {
-        productService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
     @GetMapping("/public/new-product")
     public ResponseEntity<?> findByAdmin(Pageable pageable) {

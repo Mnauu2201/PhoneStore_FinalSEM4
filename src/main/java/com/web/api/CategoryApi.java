@@ -48,28 +48,4 @@ public class CategoryApi {
         return new ResponseEntity<>(type,HttpStatus.OK);
     }
 
-    @PostMapping("/admin/create")
-    public ResponseEntity<?> save(@RequestBody Category category){
-        Category result = categoryService.save(category);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/admin/update")
-    public ResponseEntity<?> update(@RequestBody Category category){
-        Category result = categoryService.update(category);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
-    }
-
-
-    @DeleteMapping("/admin/delete")
-    public ResponseEntity<?> delete(@RequestParam("id") Long id){
-        categoryService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/admin/findById")
-    public ResponseEntity<?> findById(@RequestParam("id") Long id){
-        Category result = categoryService.findById(id);
-        return new ResponseEntity<>(result,HttpStatus.OK);
-    }
 }
