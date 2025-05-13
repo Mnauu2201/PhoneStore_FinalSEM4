@@ -33,6 +33,7 @@ public class BlogServiceImp implements BlogService {
     @Autowired
     private CommonPage commonPage;
 
+
     @Override
     public BlogResponse save(BlogRequest request) {
         if(request.getPrimaryBlog() == true){

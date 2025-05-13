@@ -47,5 +47,4 @@ public class CategoryApi {
         List<CategoryType> type = Arrays.stream(CategoryType.class.getEnumConstants()).toList();
         return new ResponseEntity<>(type,HttpStatus.OK);
     }
-
 }

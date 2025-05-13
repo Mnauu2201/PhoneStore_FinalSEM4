@@ -32,7 +32,6 @@ public class ProductApi {
 
     @Autowired
     private ProductMapper productMapper;
-
     @GetMapping("/public/findById")
     public ResponseEntity<?> findByIdForUser(@RequestParam("id") Long id) {
         Product response = productService.findByIdForAdmin(id);

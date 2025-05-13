@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 public interface UserAddressRepository extends JpaRepository<UserAddress,Long> {
 
     @Query("select u from UserAddress u where u.user.id = ?1")

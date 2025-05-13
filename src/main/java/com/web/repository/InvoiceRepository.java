@@ -1,5 +1,4 @@
 package com.web.repository;
-
 import com.web.entity.Category;
 import com.web.entity.Invoice;
 import com.web.enums.PayType;
@@ -45,6 +44,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
     public Double revenueByDate(Date ngay, Integer index);
 
     @Query(value = "select count(i.id) from invoice i\n" +
+
             "where i.status_invoice = ?2 and i.status_update_date = ?1",nativeQuery = true)
     public Double numInvoiceToDay(Date ngay, Integer index);
 

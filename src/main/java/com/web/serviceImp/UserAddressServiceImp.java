@@ -39,7 +39,6 @@ public class UserAddressServiceImp implements UserAddressService {
         List<UserAdressResponse> responses = userAddressMapper.listUserAddToListResponse(userAddresses);
         return responses;
     }
-
     @Override
     public UserAdressResponse findById(Long id) {
         Optional<UserAddress> userAddress = userAddressRepository.findById(id);

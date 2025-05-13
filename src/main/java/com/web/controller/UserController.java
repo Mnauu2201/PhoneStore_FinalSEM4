@@ -18,7 +18,6 @@ public class UserController {
         return "user/chitietbaiviet";
     }
 
-
     @RequestMapping(value = {"/dangnhap"}, method = RequestMethod.GET)
     public String dangnhap() {
         return "user/dangnhap";
@@ -29,18 +28,14 @@ public class UserController {
         return "user/index";
     }
 
-
     @RequestMapping(value = {"/taikhoan"}, method = RequestMethod.GET)
     public String taikhoan() {
         return "user/taikhoan";
     }
 
+
     @RequestMapping(value = {"/timdonhang"}, method = RequestMethod.GET)
     public String timdonhang() {
         return "user/timdonhang";
     }
-
-
-
-
 }

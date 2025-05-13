@@ -15,10 +15,11 @@ import java.util.List;
 public interface InvoiceService {
 
 
+
     public List<InvoiceResponse> findByUser();
 
     public Page<InvoiceResponse> findAll(Date from, Date to, Pageable pageable);
-    
+
     public InvoiceResponse findById(Long invoiceId);
 
     public InvoiceResponse findByIdForAdmin(Long invoiceId);

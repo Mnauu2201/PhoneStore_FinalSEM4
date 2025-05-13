@@ -46,12 +46,12 @@ public class UserAddressApi {
         userAddressService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @GetMapping("/user/my-address")
     public ResponseEntity<?> findAll(Pageable pageable){
         List<UserAdressResponse> result = userAddressService.findByUser();
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
+
 
     @GetMapping("/user/findById")
     public ResponseEntity<?> findById(@RequestParam("id") Long id){

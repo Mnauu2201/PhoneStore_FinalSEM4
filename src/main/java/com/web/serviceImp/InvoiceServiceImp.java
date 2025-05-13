@@ -48,7 +48,6 @@ public class InvoiceServiceImp implements InvoiceService {
     @Autowired
     private VoucherRepository voucherRepository;
 
-
     @Autowired
     private CommonPage commonPage;
 
@@ -58,18 +57,12 @@ public class InvoiceServiceImp implements InvoiceService {
     @Autowired
     private ProductRepository productRepository;
 
-
-
     @Autowired
     private ProductColorRepository productColorRepository;
 
     @Autowired
     private InvoiceMapper invoiceMapper;
-
-
-
-
-
+  
     @Override
     public List<InvoiceResponse> findByUser() {
         User user = userUtils.getUserWithAuthority();
@@ -89,7 +82,6 @@ public class InvoiceServiceImp implements InvoiceService {
 //        Page<InvoiceResponse> result = commonPage.restPage(page,list);
         return null;
     }
-
 
     @Override
     public InvoiceResponse findById(Long invoiceId) {
