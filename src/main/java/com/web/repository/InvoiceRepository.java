@@ -1,18 +1,7 @@
 package com.web.repository;
 
-import com.web.entity.Category;
-import com.web.entity.Invoice;
-import com.web.enums.PayType;
-import com.web.enums.StatusInvoice;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.util.List;
+import com.web.entity.Category;
 
 public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
 
@@ -45,6 +34,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
     public Double revenueByDate(Date ngay, Integer index);
 
     @Query(value = "select count(i.id) from invoice i\n" +
+
             "where i.status_invoice = ?2 and i.status_update_date = ?1",nativeQuery = true)
     public Double numInvoiceToDay(Date ngay, Integer index);
 
@@ -53,6 +43,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
     public Page<Invoice> findByDateAndStatus(Date from, Date to, StatusInvoice status, Pageable pageable);
 
     @Query("select i from Invoice i where i.createdDate >= ?1 and i.createdDate <= ?2 and i.payType = ?3 and i.statusInvoice = ?4")
+
     public Page<Invoice> findByDateAndPaytypeAndStatus(Date from, Date to, PayType payType,StatusInvoice status, Pageable pageable);
 
 }
