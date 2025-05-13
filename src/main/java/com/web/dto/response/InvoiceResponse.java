@@ -1,8 +1,22 @@
 package com.web.dto.response;
 
+import com.web.entity.UserAddress;
+import com.web.enums.PayType;
+import com.web.enums.StatusInvoice;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class InvoiceResponse {
+
     private Long id;
 
     private Date createdDate;
@@ -26,4 +40,5 @@ public class InvoiceResponse {
     private StatusInvoice statusInvoice;
 
     private Double shipCost;
+
 }

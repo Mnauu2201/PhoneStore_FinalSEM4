@@ -1,27 +1,24 @@
 package com.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.web.enums.PayType;
 import com.web.enums.StatusInvoice;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "invoice")
 @Getter
 @Setter
 public class Invoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -56,4 +53,5 @@ public class Invoice {
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private Voucher voucher;
+
 }

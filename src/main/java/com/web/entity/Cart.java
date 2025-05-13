@@ -3,11 +3,6 @@ package com.web.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
