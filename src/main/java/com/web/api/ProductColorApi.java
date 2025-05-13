@@ -22,12 +22,23 @@ public class ProductColorApi {
     @Autowired
     private ProductColorService productColorService;
 
+    @DeleteMapping("/admin/delete")
+    public ResponseEntity<?> delete(@RequestParam("id") Long id){
+        productColorRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/public/find-by-id")
     public ResponseEntity<?> findById(@RequestParam("id") Long id){
         ProductColor result = productColorService.findById(id);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
+    @PostMapping("/admin/update")
+    public ResponseEntity<?> update( @RequestBody ProductColor productColor){
+        ProductColor result = productColorService.update(productColor);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
 
     @GetMapping("/public/find-by-storage")
     public ResponseEntity<?> findByStorage( @RequestParam("id") Long id){

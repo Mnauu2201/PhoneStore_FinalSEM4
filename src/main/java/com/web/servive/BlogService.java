@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface BlogService {
 
-
     public BlogResponse save(BlogRequest request);
 
     public BlogResponse update(BlogRequest request);

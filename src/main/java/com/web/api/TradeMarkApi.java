@@ -33,5 +33,29 @@ public class TradeMarkApi {
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
+    @PostMapping("/admin/create")
+    public ResponseEntity<?> save(@RequestBody TradeMark tradeMark){
+        TradeMark result = tradeMarkService.save(tradeMark);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/admin/update")
+    public ResponseEntity<?> update(@RequestBody TradeMark tradeMark){
+        TradeMark result = tradeMarkService.update(tradeMark);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+
+    @DeleteMapping("/admin/delete")
+    public ResponseEntity<?> delete(@RequestParam("id") Long id){
+        tradeMarkService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/findById")
+    public ResponseEntity<?> findById(@RequestParam("id") Long id){
+        TradeMark result = tradeMarkService.findById(id);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
 
 }

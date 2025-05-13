@@ -23,6 +23,23 @@ public class BlogApi {
     @Autowired
     private BlogService blogService;
 
+    @PostMapping("/admin/create")
+    public ResponseEntity<?> save(@RequestBody BlogRequest blogRequest){
+        BlogResponse result = blogService.save(blogRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/admin/update")
+    public ResponseEntity<?> update(@RequestBody BlogRequest blogRequest){
+        BlogResponse result = blogService.save(blogRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/admin/delete")
+    public ResponseEntity<?> delete(@RequestParam("id") Long id){
+        blogService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @GetMapping("/public/findAll")
     public ResponseEntity<?> findAll(Pageable pageable){

@@ -13,12 +13,14 @@ import java.util.List;
 
 @Service
 public interface InvoiceService {
-
-
+    
+    public InvoiceResponse updateStatus(Long invoiceId, StatusInvoice statusInvoice);
 
     public List<InvoiceResponse> findByUser();
 
     public Page<InvoiceResponse> findAll(Date from, Date to, Pageable pageable);
+
+    public InvoiceResponse cancelInvoice(Long invoiceId);
 
     public InvoiceResponse findById(Long invoiceId);
 

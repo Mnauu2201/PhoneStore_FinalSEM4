@@ -29,7 +29,7 @@ public class BannerServiceImp implements BannerService {
     @Override
     public void delete(Long id) {
         bannerRepository.deleteById(id);
-
+    }
 
     @Override
     public Banner findById(Long id) {

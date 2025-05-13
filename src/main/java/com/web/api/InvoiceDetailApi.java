@@ -28,12 +28,6 @@ public class InvoiceDetailApi {
     @Autowired
     private UserUtils userUtils;
 
-    @GetMapping("/user/find-by-invoice")
-    public ResponseEntity<?> findByInvoice(@RequestParam("idInvoice") Long idInvoice){
-        List<InvoiceDetailResponse> response = invoiceDetailService.findByInvoice(idInvoice);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }
-
     @GetMapping("/admin/find-by-invoice")
     public ResponseEntity<?> findByInvoiceAdmin(@RequestParam("idInvoice") Long idInvoice){
         List<InvoiceDetailResponse> response = invoiceDetailService.findByInvoice(idInvoice);

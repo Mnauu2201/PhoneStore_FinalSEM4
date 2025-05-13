@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
 
-    @RequestMapping(value = {"/baiviet"}, method = RequestMethod.GET)
-    public String baiviet() {
-        return "user/baiviet";
-    }
-
-    @RequestMapping(value = {"/chitietbaiviet"}, method = RequestMethod.GET)
-    public String chitietbaiviet() {
-        return "user/chitietbaiviet";
+    @RequestMapping(value = {"/dangky"}, method = RequestMethod.GET)
+    public String dangky() {
+        return "user/dangky";
     }
 
     @RequestMapping(value = {"/dangnhap"}, method = RequestMethod.GET)
@@ -23,19 +18,25 @@ public class UserController {
         return "user/dangnhap";
     }
 
-    @RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
-    public String index() {
-        return "user/index";
+    @RequestMapping(value = {"/datlaimatkhau"}, method = RequestMethod.GET)
+    public String datlaimatkhau() {
+        return "user/datlaimatkhau";
     }
 
-    @RequestMapping(value = {"/taikhoan"}, method = RequestMethod.GET)
-    public String taikhoan() {
-        return "user/taikhoan";
+    @RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
+    public String detail() {
+        return "user/detail";
+    }
+
+    @RequestMapping(value = {"/quenmatkhau"}, method = RequestMethod.GET)
+    public String quenmatkhau() {
+        return "user/quenmatkhau";
+    }
+
+    @RequestMapping(value = {"/xacnhan"}, method = RequestMethod.GET)
+    public String xacnhan() {
+        return "user/xacnhan";
     }
 
 
-    @RequestMapping(value = {"/timdonhang"}, method = RequestMethod.GET)
-    public String timdonhang() {
-        return "user/timdonhang";
-    }
 }

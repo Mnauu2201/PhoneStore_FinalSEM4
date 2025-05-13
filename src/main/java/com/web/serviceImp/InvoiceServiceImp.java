@@ -13,6 +13,7 @@ import com.web.models.QueryStatusTransactionResponse;
 import com.web.processor.QueryTransactionStatus;
 import com.web.repository.*;
 import com.web.servive.InvoiceService;
+import com.web.servive.VoucherService;
 import com.web.utils.CommonPage;
 import com.web.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,9 @@ public class InvoiceServiceImp implements InvoiceService {
     private VoucherRepository voucherRepository;
 
     @Autowired
+    private VoucherService voucherService;
+
+    @Autowired
     private CommonPage commonPage;
 
     @Autowired
@@ -62,7 +66,29 @@ public class InvoiceServiceImp implements InvoiceService {
 
     @Autowired
     private InvoiceMapper invoiceMapper;
-  
+
+
+    @Override
+    public InvoiceResponse updateStatus(Long invoiceId, StatusInvoice statusInvoice) {
+        Optional<Invoice> invoice = invoiceRepository.findById(invoiceId);
+        if(invoice.isEmpty()){
+            throw new MessageException("invoice id not found");
+        }
+        invoice.get().setStatusInvoice(statusInvoice);
+        Date d = new Date(System.currentTimeMillis());
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            java.util.Date parsedDate = dateFormat.parse(d.toString()+" 00:00:00");
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            invoice.get().setStatusUpdateDate(timestamp);
+        } catch(Exception e) { //this generic but you can control another types of exception
+            // look the origin of excption
+        }
+
+        invoiceRepository.save(invoice.get());
+        return null;
+    }
+
     @Override
     public List<InvoiceResponse> findByUser() {
         User user = userUtils.getUserWithAuthority();
@@ -80,6 +106,38 @@ public class InvoiceServiceImp implements InvoiceService {
         Page<Invoice> page = invoiceRepository.findByDate(from, to,pageable);
 //        List<InvoiceResponse> list = invoiceMapper.invoiceListToInvoiceResponseList(page.getContent());
 //        Page<InvoiceResponse> result = commonPage.restPage(page,list);
+        return null;
+    }
+
+    @Override
+    public InvoiceResponse cancelInvoice(Long invoiceId) {
+        Optional<Invoice> invoice = invoiceRepository.findById(invoiceId);
+        if(invoice.isEmpty()){
+            throw new MessageException("invoice id not found");
+        }
+        if(invoice.get().getUserAddress().getUser().getId() != userUtils.getUserWithAuthority().getId()){
+            throw new MessageException("access denied");
+        }
+//        if(invoice.get().getPayType().equals(PayType.PAYMENT_MOMO)){
+//            throw new MessageException("Đơn hàng đã được thanh toán, không thể hủy");
+//        }
+//        Long idSt = invoice.get().getStatus().getId();
+//        if(idSt == StatusUtils.DA_GUI || idSt == StatusUtils.DA_NHAN || idSt == StatusUtils.DA_HUY || idSt == StatusUtils.KHONG_NHAN_HANG){
+//            throw new MessageException(invoice.get().getStatus().getName()+ " không thể hủy hàng");
+//        }
+//        invoice.get().setStatus(statusRepository.findById(StatusUtils.DA_HUY).get());
+//        Invoice result = invoiceRepository.save(invoice.get());
+//        List<InvoiceDetail> list  = invoiceDetailRepository.findByInvoiceId(invoiceId);
+//        for(InvoiceDetail i : list){
+//            i.getProductSize().setQuantity(i.getQuantity() + i.getProductSize().getQuantity());
+//            productSizeRepository.save(i.getProductSize());
+//        }
+//        InvoiceStatus invoiceStatus = new InvoiceStatus();
+//        invoiceStatus.setInvoice(invoice.get());
+//        invoiceStatus.setCreatedDate(new Date(System.currentTimeMillis()));
+//        invoiceStatus.setCreatedTime(new Time(System.currentTimeMillis()));
+//        invoiceStatus.setStatus(statusRepository.findById(StatusUtils.DA_HUY).get());
+//        invoiceStatusRepository.save(invoiceStatus);
         return null;
     }
 
