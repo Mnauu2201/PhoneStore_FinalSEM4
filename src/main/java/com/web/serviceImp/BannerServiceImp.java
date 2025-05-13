@@ -16,6 +16,20 @@ public class BannerServiceImp implements BannerService {
     @Autowired
     private BannerRepository bannerRepository;
 
+    @Override
+    public Banner save(Banner banner) {
+        return bannerRepository.save(banner);
+    }
+
+    @Override
+    public Banner update(Banner banner) {
+        return bannerRepository.save(banner);
+    }
+
+    @Override
+    public void delete(Long id) {
+        bannerRepository.deleteById(id);
+
 
     @Override
     public Banner findById(Long id) {

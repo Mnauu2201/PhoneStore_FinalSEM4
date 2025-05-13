@@ -23,6 +23,29 @@ public class UserAddressApi {
     @Autowired
     private UserAddressService userAddressService;
 
+    @PostMapping("/user/create")
+    public ResponseEntity<?> save(@Valid @RequestBody UserAdressRequest userAdressRequest, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        UserAdressResponse result = userAddressService.create(userAdressRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/user/update")
+    public ResponseEntity<?> update(@Valid @RequestBody UserAdressRequest userAdressRequest, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        UserAdressResponse result = userAddressService.update(userAdressRequest);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/user/delete")
+    public ResponseEntity<?> delete(@RequestParam("id") Long id){
+        userAddressService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @GetMapping("/user/my-address")
     public ResponseEntity<?> findAll(Pageable pageable){
         List<UserAdressResponse> result = userAddressService.findByUser();
@@ -30,5 +53,10 @@ public class UserAddressApi {
     }
 
 
+    @GetMapping("/user/findById")
+    public ResponseEntity<?> findById(@RequestParam("id") Long id){
+        UserAdressResponse result = userAddressService.findById(id);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
 
 }

@@ -26,12 +26,6 @@ public class InvoiceApi {
     @Autowired
     private InvoiceService invoiceService;
 
-    @PostMapping("/user/create")
-    public ResponseEntity<?> save(@RequestBody InvoiceRequest invoiceRequest){
-        InvoiceResponse result = invoiceService.create(invoiceRequest);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
-    }
-
     @GetMapping("/user/find-by-user")
     public ResponseEntity<?> findByUser(){
         List<InvoiceResponse> result = invoiceService.findByUser();
@@ -43,9 +37,6 @@ public class InvoiceApi {
         InvoiceResponse result = invoiceService.findById(idInvoice);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-
-
     @GetMapping("/public/tim-kiem-don-hang")
     public ResponseEntity<?> timKiemDonHang(@RequestParam("id") Long id, @RequestParam("phone") String phone){
         InvoiceResponse result = invoiceService.timKiemDonHang(id, phone);

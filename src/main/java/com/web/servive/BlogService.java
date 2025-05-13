@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public interface BlogService {
 
+
+    public BlogResponse save(BlogRequest request);
+
+    public BlogResponse update(BlogRequest request);
+
+    public void delete(Long id);
+
     public BlogResponse findById(Long id);
 
     public BlogResponse blogPrimary();

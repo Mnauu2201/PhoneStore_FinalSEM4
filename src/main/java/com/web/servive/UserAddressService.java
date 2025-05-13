@@ -11,5 +11,13 @@ public interface UserAddressService {
 
     public List<UserAdressResponse> findByUser();
 
+    public UserAdressResponse findById(Long id);
+
+    public UserAdressResponse create(UserAdressRequest userAdressRequest);
+
+    public UserAdressResponse update(UserAdressRequest userAdressRequest);
+
+    public void delete(Long id);
+
 
 }

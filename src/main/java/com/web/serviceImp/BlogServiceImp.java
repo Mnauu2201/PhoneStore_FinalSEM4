@@ -35,6 +35,42 @@ public class BlogServiceImp implements BlogService {
 
 
     @Override
+    public BlogResponse save(BlogRequest request) {
+        if(request.getPrimaryBlog() == true){
+            blogRepository.unSetPrimary();
+        }
+        Blog blog = blogMapper.requestToBlog(request);
+        blog.setUser(userUtils.getUserWithAuthority());
+        blog.setCreatedDate(new Date(System.currentTimeMillis()));
+        Blog result = blogRepository.save(blog);
+        return blogMapper.blogToResponse(result);
+    }
+
+    @Override
+    public BlogResponse update(BlogRequest request) {
+        if(request.getPrimaryBlog() == true){
+            blogRepository.unSetPrimary();
+        }
+        Blog blog = blogMapper.requestToBlog(request);
+        blog.setUser(userUtils.getUserWithAuthority());
+        blog.setCreatedDate(new Date(System.currentTimeMillis()));
+        Blog result = blogRepository.save(blog);
+        return blogMapper.blogToResponse(result);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Blog> blog = blogRepository.findById(id);
+        if (blog.isEmpty()){
+            throw new MessageException("Blog not found");
+        }
+        if(blog.get().getPrimaryBlog()){
+            throw new MessageException("Blog is primary, can't delete");
+        }
+        blogRepository.delete(blog.get());
+    }
+
+    @Override
     public BlogResponse findById(Long id) {
         Optional<Blog> blog = blogRepository.findById(id);
         if (blog.isEmpty()){
